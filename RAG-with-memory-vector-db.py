@@ -24,6 +24,9 @@ docs = loader.load()
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 splits = text_splitter.split_documents(docs)
+
+print("---------------------------------")
+
 print(splits[0])
 print(splits[1])
 
@@ -47,4 +50,6 @@ rag_chain = (
 
 response = rag_chain.invoke("What is Task Decomposition?")
 
+
+print("---------------------------------")
 print(response)
