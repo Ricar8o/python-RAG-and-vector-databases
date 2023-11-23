@@ -66,6 +66,8 @@ En la función search()
 2. Cargar los documentos del indice `langchain-demo`
 3. Enviar una pregunta y obtener los fragmentos de texto guardados en la base de datos vectorial que concuerden mejor con la pregunta.
 
+![Alt text](img/pinecone-response.png)
+
 ## Uso
 
 1. Clona este repositorio en tu máquina local.
