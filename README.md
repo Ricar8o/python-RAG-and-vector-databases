@@ -31,7 +31,7 @@ Este repositorio contiene varios programas escritos en Python que usan librería
 Este [programa](src/chatgpt-prompt-send.py) es un ejemplo de cómo utilizar langchain para generar respuestas a preguntas generando un prompt y utilizando modelos de lenguaje de OpenAI.
 ![send-prompt](img/send-prompt.png)
 
-## Programa 2
+## 2. RAG WITH MEMORY VECTOR DATABASE
 Este [programa](src/RAG-with-memory-vector-db.py) utiliza las librerías bs4 para obtener los datos de una página html y langchain para:
 1. Cargar los datos de una página usando el módulo DocumentLoaders.
 2. Partir los documentos obtenidos de la página en fragmentos más pequeños ya que el documento cargado tiene más de 42 mil carácteres, es demasiado largo para que quepa en la ventana de contexto de muchos modelos. E incluso si fuera un módelo que soportara textos largos para los modelos suele ser dificil encontrar algún contenido relevante en mensajes muy largos.
@@ -48,10 +48,23 @@ Este [programa](src/RAG-with-memory-vector-db.py) utiliza las librerías bs4 par
 
 ![prompt-response-2](img/prompt-response-2.png)
 
-## Programa 3
+## 3. RAG USING PINECONE
 
+Este [programa](src/RAG-using-pinecone.py) necesita en las variables de entorno una API key para acceder a los recursos de una cuenta en pinecone, que es una base de datos vectorial en la nube, el nombre de un ambiente creado en pinecone y los módulos de langchain para:
 
+En la función loadText():
+1. Leer un [archivo de texto](./animation.txt) usando TextLoader de langchain.
+2. Partirlo en fragmentos usando RecursiveCharacterTextSplitter de langchain.
+3. Crear un indice si no existe en el ambiente de pinecone.
+4. Y con esta línea cargar los fragmentos de texto en la base de datos vectorial
+    ```python
+    docsearch = Pinecone.from_documents(docs, embeddings, index_name=index_name)
+    ```
+En la función search()
 
+1. Acceder a los recursos de Pinecone usando el ambiente y la llave API.
+2. Cargar los documentos del indice `langchain-demo`
+3. Enviar una pregunta y obtener los fragmentos de texto guardados en la base de datos vectorial que concuerden mejor con la pregunta.
 
 ## Uso
 
@@ -74,4 +87,4 @@ Si deseas contribuir a este proyecto, puedes enviar un pull request con tus camb
 
 ## Licencia
 
-Este proyecto está bajo la Licencia [nombre de la licencia]. Consulta el archivo LICENSE para obtener más información.
+Este proyecto está bajo la Licencia [MIT]. Consulta el archivo [LICENSE](./LICENSE) para obtener más información.
