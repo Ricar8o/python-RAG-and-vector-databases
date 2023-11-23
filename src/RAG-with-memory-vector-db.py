@@ -30,10 +30,13 @@ print("---------------------------------")
 print(splits[0])
 print(splits[1])
 
+
 vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
 retriever = vectorstore.as_retriever()
 
+print("---------------------------------")
 prompt = hub.pull("rlm/rag-prompt")
+print(prompt)
 llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
 
 
